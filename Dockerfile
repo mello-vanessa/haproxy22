@@ -12,7 +12,6 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 # UPDATE & INSTALL KEYS
 RUN apt-get update -y
 RUN apt-get -y install gnupg2 curl
-#RUN curl https://haproxy.debian.net/bernat.debian.org.gpg | apt-key add -
 
 # INSTALL DEPENDENCIES
 RUN apt-get update && apt-get -y install \
@@ -29,7 +28,6 @@ RUN apt-get update && apt-get -y install \
     liblua5.3-0 \ 
     htop \
     haproxy=2.2.\* 
-    #haproxy=2.2
 
 # CHANGE WORKDIR
 WORKDIR /opt
