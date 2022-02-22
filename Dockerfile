@@ -47,6 +47,10 @@ COPY  files/haproxy.cfg        /etc/haproxy/haproxy.cfg
 COPY  files/fullchain.pem      /etc/haproxy/certs/fullchain.pem 
 COPY  files/fullchain.pem.key  /etc/haproxy/certs/fullchain.pem.key
 COPY  files/rsync-haproxy.conf /etc/rsyslog.d/haproxy.conf
+# TESTAR 403
+COPY  files/haproxy-403.cfg   /etc/rsyslog.d/haproxy-403.conf
+# THROTTLING IP
+COPY  files/haproxy-429.cfg   /etc/rsyslog.d/haproxy.conf
 COPY  files/start.sh          /opt/scripts/start.sh
 
 # START
