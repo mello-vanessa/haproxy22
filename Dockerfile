@@ -47,18 +47,30 @@ RUN touch /var/log/haproxy.log
 # CREATE USER HAPROXY
 RUN adduser --system --group haproxy 
 
+# INSTALL TELEGRAF
+RUN dpkg -i telegraf_1.21.4-1_amd64.deb \
+    && rm -rf telegraf_1.21.4-1_amd64.deb
+
 # COPY NEEDED FILES
-COPY  files/fullchain.pem      /etc/haproxy/certs/fullchain.pem 
-COPY  files/fullchain.pem.key  /etc/haproxy/certs/fullchain.pem.key
-COPY  files/rsync-haproxy.conf /etc/rsyslog.d/haproxy.conf
+COPY  files/fullchain.pem         /etc/haproxy/certs/fullchain.pem 
+COPY  files/fullchain.pem.key     /etc/haproxy/certs/fullchain.pem.key
+COPY  files/rsync-haproxy.conf    /etc/rsyslog.d/haproxy.conf
+COPY  files/telegraf/telegraf.conf     /etc/telegraf/telegraf.conf
+COPY  files/telegraf/telegraf.init     /etc/init.d/telegraf
+
+# COPY NEEDED SRC
+COPY src/telegraf_1.21.4-1_amd64.deb   .
 # TESTAR 403
-COPY  files/haproxy-403.cfg    /etc/haproxy/haproxy-403.cfg
+COPY  files/haproxy-403.cfg       /etc/haproxy/haproxy-403.cfg
 # THROTTLING IP
-COPY  files/haproxy-429.cfg   /etc/haproxy/haproxy.cfg
+COPY  files/haproxy-429.cfg       /etc/haproxy/haproxy.cfg
 # THROTTLING HOST
 COPY  files/haproxy-429-425.cfg   /etc/haproxy/haproxy-429-425.cfg
-COPY  files/rates.map   /etc/haproxy/rates.map
-COPY  files/start.sh          /opt/scripts/start.sh
+COPY  files/rates.map             /etc/haproxy/rates.map
+COPY  files/start.sh              /opt/scripts/start.sh
+# ERRORS CUSTOM PAGE
+COPY  files/errors/425.http       /etc/haproxy/errors/425.http
+COPY  files/errors/429.http       /etc/haproxy/errors/429.http
 
 # START
 RUN   chmod 755 /opt/scripts/start.sh
@@ -66,13 +78,14 @@ RUN   ln -s /opt/scripts/start.sh        /usr/local/bin/start
 
 # DIR CREATION / LINKS / CHMODS / CHOWN
 RUN chown haproxy:haproxy    /var/log/haproxy.log
+RUN chmod 755 /etc/init.d/telegraf 
+
+# ADD USER TELEGRAF TO GROUP HAPROXY
+RUN usermod -a -G haproxy telegraf
 
 EXPOSE 80 443
 
 # CLEAN THE CONTAINER
 RUN apt-get clean
 
-
 CMD ["start", "daemonize"]
-
-

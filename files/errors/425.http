@@ -1,0 +1,8 @@
+HTTP/1.0 425 Too Early
+Cache-Control: no-cache
+Connection: close
+Content-Type: text/html
+
+<html><body><h1>425 Too Early</h1>
+Erro 425: No momento nossa loja está cheia de clientes.
+</body></html>
