@@ -48,6 +48,7 @@ RUN touch /var/log/haproxy.log
 RUN adduser --system --group haproxy 
 
 # INSTALL TELEGRAF
+COPY src/telegraf_1.21.4-1_amd64.deb   .
 RUN dpkg -i telegraf_1.21.4-1_amd64.deb \
     && rm -rf telegraf_1.21.4-1_amd64.deb
 
@@ -58,8 +59,6 @@ COPY  files/rsync-haproxy.conf    /etc/rsyslog.d/haproxy.conf
 COPY  files/telegraf/telegraf.conf     /etc/telegraf/telegraf.conf
 COPY  files/telegraf/telegraf.init     /etc/init.d/telegraf
 
-# COPY NEEDED SRC
-COPY src/telegraf_1.21.4-1_amd64.deb   .
 # TESTAR 403
 COPY  files/haproxy-403.cfg       /etc/haproxy/haproxy-403.cfg
 # THROTTLING IP
