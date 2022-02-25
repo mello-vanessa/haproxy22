@@ -55,6 +55,9 @@ COPY  files/rsync-haproxy.conf /etc/rsyslog.d/haproxy.conf
 COPY  files/haproxy-403.cfg    /etc/haproxy/haproxy-403.cfg
 # THROTTLING IP
 COPY  files/haproxy-429.cfg   /etc/haproxy/haproxy.cfg
+# THROTTLING HOST
+COPY  files/haproxy-429-425.cfg   /etc/haproxy/haproxy-429-425.cfg
+COPY  files/rates.map   /etc/haproxy/rates.map
 COPY  files/start.sh          /opt/scripts/start.sh
 
 # START
