@@ -1,3 +1,4 @@
+# DEBIAN 11
 FROM debian:bullseye
 
 LABEL org.opencontainers.image.authors="Vanessa Mello"
@@ -5,9 +6,13 @@ LABEL org.opencontainers.image.authors="Vanessa Mello"
 # ENVIRONMENTs GOES HERE
 ENV TERM=xterm
 
-# REMOVE SH (DASH) AND LINK SH TO BASH
-RUN printf '#!/bin/sh\nexit 0' > /usr/sbin/policy-rc.d
+# REMOVE SH (DASH), LINK SH TO BASH
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+
+# PREVENT TO START AUTOMATICALLY BEFORE INSTALL PACKAGE
+#RUN printf '#!/bin/sh\nexit 0' > /usr/sbin/policy-rc.d
+RUN printf 'echo exit 101' > /usr/sbin/policy-rc.d
+RUN chmod +x /usr/sbin/policy-rc.d
 
 # UPDATE & INSTALL KEYS
 RUN apt-get update -y
