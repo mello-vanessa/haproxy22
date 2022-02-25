@@ -3,6 +3,6 @@ Cache-Control: no-cache
 Connection: close
 Content-Type: text/html
 
-<html><body><h1>429 Too Many Requests</h1>
+<html><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><body><h1>429 Too Many Requests</h1>
 Erro 429: No momento nossa loja está cheia de clientes.
 </body></html>
