@@ -52,8 +52,8 @@ RUN dpkg -i telegraf_1.21.4-1_amd64.deb \
     && rm -rf telegraf_1.21.4-1_amd64.deb
 
 # COPY NEEDED FILES
-COPY  files/fullchain.pem         /etc/haproxy/certs/fullchain.pem 
-COPY  files/fullchain.pem.key     /etc/haproxy/certs/fullchain.pem.key
+COPY  files/certs/fullchain.pem         /etc/haproxy/certs/fullchain.pem 
+COPY  files/certs/fullchain.pem.key     /etc/haproxy/certs/fullchain.pem.key
 COPY  files/rsync-haproxy.conf    /etc/rsyslog.d/haproxy.conf
 COPY  files/telegraf/telegraf.conf     /etc/telegraf/telegraf.conf
 COPY  files/telegraf/telegraf.init     /etc/init.d/telegraf
