@@ -67,9 +67,16 @@ COPY  files/haproxy-429.cfg       /etc/haproxy/haproxy.cfg
 COPY  files/haproxy-429-425.cfg   /etc/haproxy/haproxy-429-425.cfg
 COPY  files/rates.map             /etc/haproxy/rates.map
 COPY  files/start.sh              /opt/scripts/start.sh
+
 # ERRORS CUSTOM PAGE
-COPY  files/errors/425.http       /etc/haproxy/errors/425.http
+COPY  files/errors/400.http       /etc/haproxy/errors/400.http
+COPY  files/errors/403.http       /etc/haproxy/errors/403.http
+COPY  files/errors/408.http       /etc/haproxy/errors/408.http
 COPY  files/errors/429.http       /etc/haproxy/errors/429.http
+COPY  files/errors/500.http       /etc/haproxy/errors/500.http
+COPY  files/errors/502.http       /etc/haproxy/errors/502.http
+COPY  files/errors/503.http       /etc/haproxy/errors/503.http
+COPY  files/errors/504.http       /etc/haproxy/errors/504.http
 
 # START
 RUN   chmod 755 /opt/scripts/start.sh

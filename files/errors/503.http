@@ -1,4 +1,4 @@
-HTTP/1.0 429 Too Many Requests
+HTTP/1.0 503 Service Unavailable
 Cache-Control: no-cache
 Connection: close
 Content-Type: text/html
@@ -13,7 +13,7 @@ Content-Type: text/html
 		<div class="u-valign">
 			<div class="text">
 			    <h1>Ops :(</h1>
-			    <p class="descr">Erro 429 - No momento nossa loja está cheia de clientes</p>
+			    <p class="descr">Erro 503 - Service unavailable</p>
 			    <p class="descr-reload">Aguarde a página ser atualizada em 1 minuto ou <a href="javascript:location.reload();">clique aqui</a> para atualizar manualmente.</p>
 		    </div>
 		<div class="counter">
