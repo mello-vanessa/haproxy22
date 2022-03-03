@@ -1,4 +1,4 @@
-TTP/1.0 502 Bad Gateway
+HTTP/1.0 502 Bad Gateway
 Cache-Control: no-cache
 Connection: close
 Content-Type: text/html
