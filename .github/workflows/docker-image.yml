@@ -34,6 +34,6 @@ jobs:
           IMAGE_TAG: ${{ steps.sources.outputs.SOURCE_TAG }}
         run: |
           # docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
-          docker build -t 006563289334.dkr.ecr.us-east-1.amazonaws.com/haproxy22:latest .
+          docker build -t 006563289334.dkr.ecr.us-east-1.amazonaws.com/$ECR_REPOSITORY:latest .
           # docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          docker push 006563289334.dkr.ecr.us-east-1.amazonaws.com/haproxy22:latest
+          docker push 006563289334.dkr.ecr.us-east-1.amazonaws.com/$ECR_REPOSITORY:latest
