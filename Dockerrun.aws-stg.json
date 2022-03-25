@@ -1,0 +1,65 @@
+{
+    "containerDefinitions": [
+      {
+        "volumesFrom": [],
+        "memory": 3000,
+        "extraHosts": null,
+        "dnsServers": null,
+        "disableNetworking": null,
+        "dnsSearchDomains": null,
+        "portMappings": [
+          {
+            "hostPort": 80,
+            "containerPort": 80,
+            "protocol": "tcp"
+          },
+          {
+            "hostPort": 443,
+            "containerPort": 443,
+            "protocol": "tcp"
+          },
+          {
+            "hostPort": 34180,
+            "containerPort": 34180,
+            "protocol": "tcp"
+          }
+        ],
+        "hostname": null,
+        "essential": true,
+        "entryPoint": null,
+        "mountPoints": [],
+        "name": "haproxy-prod",
+        "ulimits": [
+          {
+            "softLimit": 1048576,
+            "hardLimit": 1048576,
+            "name": "nofile"
+          }
+        ],
+        "dockerSecurityOptions": null,
+        "environment": [
+          {
+            "name": "APP_NAME",
+            "value": "haproxy-stg"
+          },
+          {
+            "name": "ENVIRONMENT",
+            "value": "staging"
+          }
+        ],
+        "workingDirectory": null,
+        "readonlyRootFilesystem": null,
+        "image": "006563289334.dkr.ecr.us-east-1.amazonaws.com/haproxy22",
+        "command": null,
+        "user": null,
+        "dockerLabels": null,
+        "logConfiguration": null,
+        "cpu": 0,
+        "privileged": true,
+        "memoryReservation": 2500
+      }
+    ],
+    "placementConstraints": [],
+    "family": "entrypoint-staging"
+  }
+  
