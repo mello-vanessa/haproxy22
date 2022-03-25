@@ -23,11 +23,6 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-          
-      - name: Extract branch name
-        shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        id: extract_branch
 
       - name: Login no Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
@@ -36,7 +31,7 @@ jobs:
         env:
           ECR_REGISTRY: ${{ secrets.AWS_ECR_REGISTRY }}
           ECR_REPOSITORY: ${{ github.event.repository.name }}
-          ENV_BRANCH: eng:${{ steps.extract_branch.outputs.branch }}
+          ENV_BRANCH: ${{ github.event.pull_request.base.ref }}
           IMAGE_TAG: ${{ steps.sources.outputs.SOURCE_TAG }}
         run: |
            docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:ENV_BRANCH .
