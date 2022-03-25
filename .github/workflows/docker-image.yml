@@ -33,8 +33,8 @@ jobs:
           ECR_REPOSITORY: ${{ github.event.repository.name }}
           IMAGE_TAG: ${{ steps.sources.outputs.SOURCE_TAG }}
         run: |
-           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
-           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:SOURCE_BRANCH .
+           docker push $ECR_REGISTRY/$ECR_REPOSITORY:SOURCE_BRANCH
 
   notify-telegram:
     needs: build-push-ecr-image
