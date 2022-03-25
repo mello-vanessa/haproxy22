@@ -31,7 +31,7 @@ jobs:
         env:
           ECR_REGISTRY: ${{ secrets.AWS_ECR_REGISTRY }}
           ECR_REPOSITORY: ${{ github.event.repository.name }}
-          ENV_BRANCH: ${GITHUB_REF##*/}
+          ENV_BRANCH: ${{ github.ref_name }}
           IMAGE_TAG: ${{ steps.sources.outputs.SOURCE_TAG }}
         run: |
            docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:${GITHUB_REF##*/} .
