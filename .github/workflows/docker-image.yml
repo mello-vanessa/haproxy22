@@ -4,6 +4,8 @@ on:
   push:
     tags:
       - "[0-9]+.[0-9]+.[0-9]+"
+    branches:
+      - 'releases/haproxy24'
       
 jobs:
   build-push-ecr-image:
@@ -31,11 +33,11 @@ jobs:
         env:
           ECR_REGISTRY: ${{ secrets.AWS_ECR_REGISTRY }}
           ECR_REPOSITORY: ${{ github.event.repository.name }}
-          ENV_BRANCH: ${{ github.ref_name }}
+          ENV_BRANCH: ${{ steps.sources.outputs.SOURCE_BRANCH }}
           IMAGE_TAG: ${{ steps.sources.outputs.SOURCE_TAG }}
         run: |
-           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:${GITHUB_REF##*/} .
-           docker push $ECR_REGISTRY/$ECR_REPOSITORY:${GITHUB_REF##*/}
+           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$ENV_BRANCH .
+           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$ENV_BRANCH
 
   notify-telegram:
     needs: build-push-ecr-image
