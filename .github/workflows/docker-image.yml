@@ -17,7 +17,6 @@ jobs:
           echo ::set-output name=SOURCE_NAME::${GITHUB_REF#refs/*/}
           echo ::set-output name=SOURCE_BRANCH::${GITHUB_REF#refs/heads/}
           echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/}
-          echo "BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)" >> $GITHUB_ENV
       - name: Configura as credenciais AWS 
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -34,8 +33,8 @@ jobs:
           ECR_REPOSITORY: ${{ github.event.repository.name }}
           IMAGE_TAG: ${{ steps.sources.outputs.SOURCE_TAG }}
         run: |
-           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:env.BRANCH .
-           docker push $ECR_REGISTRY/$ECR_REPOSITORY:env.BRANCH
+           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
   notify-telegram:
     needs: build-push-ecr-image
