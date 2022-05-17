@@ -36,17 +36,17 @@ jobs:
            docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
            docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
 
-  notify-telegram:
-    needs: build-push-ecr-image
-    name: Notificacao do Telegram
-    runs-on: ubuntu-latest
-    if: always()
-    steps:
-      - name: Notificacao telegram
-        uses: yanzay/notify-telegram@v0.1.0
-        if: always()
-        with:
-          chat: ${{ secrets.chat }} # user id or channel name secret
-          token: ${{ secrets.token }} # token secret
-          status: ${{ job.status }} # do not modify this line
+ # notify-telegram:
+ #   needs: build-push-ecr-image
+ #   name: Notificacao do Telegram
+ ##   runs-on: ubuntu-latest
+ #   if: always()
+ #   steps:
+ #     - name: Notificacao telegram
+ #       uses: yanzay/notify-telegram@v0.1.0
+ #       if: always()
+ #       with:
+ #         chat: ${{ secrets.chat }} # user id or channel name secret
+ #         token: ${{ secrets.token }} # token secret
+ #         status: ${{ job.status }} # do not modify this line
           
