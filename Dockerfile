@@ -32,9 +32,10 @@ RUN apt-get update && apt-get -y install \
     socat \ 
     liblua5.3-0 \ 
     htop \
-    haproxy=2.2.\* 
     iputils-ping \
-    net-tools 
+    net-tools \
+    haproxy=2.2.\* 
+
 
 # CHANGE WORKDIR
 WORKDIR /opt
